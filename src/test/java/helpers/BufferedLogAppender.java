@@ -22,6 +22,15 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
 
     public String getAndClearLogs(String testName) {
         StringBuilder logs = logBuffers.remove(testName);
-        return logs != null ? logs.toString() : "";
+        return logs != null ? formatLogs(logs.toString(), testName) : "";
+    }
+
+    private String formatLogs(String logs, String testName) {
+        StringBuilder formattedLogs = new StringBuilder();
+        String[] logLines = logs.split(System.lineSeparator());
+        for (String line : logLines) {
+            formattedLogs.append(String.format("%s [%s] %s%n", "INFO", testName, line));
+        }
+        return formattedLogs.toString();
     }
 } 
