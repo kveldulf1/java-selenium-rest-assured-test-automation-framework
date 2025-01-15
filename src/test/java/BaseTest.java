@@ -1,20 +1,29 @@
 import helpers.BrowserFactory;
 import helpers.ConfigurationReader;
 import helpers.NoSuchBrowserException;
+import helpers.BufferedLogAppender;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 import org.openqa.selenium.WebDriver;
 import ch.qos.logback.classic.Logger;
 import static io.restassured.RestAssured.given;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 
 
 public class BaseTest {
     protected WebDriver driver;
     private static final ConfigurationReader configuration = ConfigurationReader.getInstance();
     private static final Logger log = (Logger) LoggerFactory.getLogger(BaseTest.class);
+    private static final BufferedLogAppender bufferedLogAppender = new BufferedLogAppender();
+
+    static {
+        bufferedLogAppender.start();
+        ((ch.qos.logback.classic.Logger) LoggerFactory.getLogger("ROOT")).addAppender(bufferedLogAppender);
+    }
 
     @BeforeAll
     public static void loadConfiguration() {
@@ -22,7 +31,9 @@ public class BaseTest {
     }
 
     @BeforeEach
-    public void setup() {
+    public void setup(TestInfo testInfo) {
+        MDC.put("testName", testInfo.getDisplayName());
+        log.info("Starting test: {}", testInfo.getDisplayName());
         log.info("Starting browser setup");
         try {
             driver = new BrowserFactory().createInstance(configuration);
@@ -34,9 +45,12 @@ public class BaseTest {
     }
 
     @AfterEach
-    public void quitDriver() {
-        log.info("Closing browser");       
+    public void tearDown(TestInfo testInfo) {
+        log.info("Finished test: {}", testInfo.getDisplayName());
+        log.info("Closing browser");
         driver.quit();
+        System.out.println(bufferedLogAppender.getAndClearLogs(testInfo.getDisplayName()));
+        MDC.clear();
     }
 
     @BeforeAll
