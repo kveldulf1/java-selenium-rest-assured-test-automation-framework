@@ -15,9 +15,9 @@ public class OtherParallelLoginTests extends BaseTest {
 
         @Test
         @Story("Parallel Login")
-        @Description("Verify concurrent login - additional test instance 1")
+        @Description("Verify concurrent login - additional test instance 4")
         @Severity(SeverityLevel.CRITICAL)
-        public void userLogsIn1() {
+        public void userLogsIn4() {
                 WelcomePage welcomePage = new MainPage(driver)
                                 .go()
                                 .headerComponent
@@ -31,9 +31,9 @@ public class OtherParallelLoginTests extends BaseTest {
 
         @Test
         @Story("Parallel Login")
-        @Description("Verify concurrent login - additional test instance 2")
+        @Description("Verify concurrent login - additional test instance 5")
         @Severity(SeverityLevel.CRITICAL)
-        public void userLogsIn2() {
+        public void userLogsIn5() {
                 WelcomePage welcomePage = new MainPage(driver)
                                 .go()
                                 .headerComponent
@@ -47,9 +47,9 @@ public class OtherParallelLoginTests extends BaseTest {
 
         @Test
         @Story("Parallel Login")
-        @Description("Verify concurrent login - additional test instance 3")
+        @Description("Verify concurrent login - additional test instance 6")
         @Severity(SeverityLevel.CRITICAL)
-        public void userLogsIn3() {
+        public void userLogsIn6() {
                 WelcomePage welcomePage = new MainPage(driver)
                                 .go()
                                 .headerComponent
