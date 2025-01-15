@@ -32,8 +32,12 @@ public class LoginPage extends BasePage {
         driver.findElement(passwordInput).sendKeys(password);
     }
 
-    public WelcomePage login(String email, String password) {
+    private void logLoginAttempt(String email) {
         log.info("Performing login with email: {}", email);
+    }
+
+    public WelcomePage login(String email, String password) {
+        logLoginAttempt(email);
         typeUsername(email);
         typePassword(password);
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
@@ -44,7 +48,6 @@ public class LoginPage extends BasePage {
 
     public WelcomePage loginAsRandomExistingUser() {
         currentUser = TestDataReader.getRandomValidUser();
-        log.info("Logging in as random valid user: {}", currentUser.get("email").getAsString());
         WelcomePage welcomePage = login(
             currentUser.get("email").getAsString(), 
             currentUser.get("password").getAsString()
@@ -55,7 +58,6 @@ public class LoginPage extends BasePage {
 
     public LoginPage loginAsInvalidUser() {
         JsonObject invalidUser = TestDataReader.getInvalidUser();
-        log.info("Attempting login with invalid user: {}", invalidUser.get("email").getAsString());
         login(
             invalidUser.get("email").getAsString(), 
             invalidUser.get("password").getAsString()

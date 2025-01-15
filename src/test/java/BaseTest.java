@@ -19,10 +19,18 @@ public class BaseTest {
     private static final ConfigurationReader configuration = ConfigurationReader.getInstance();
     private static final Logger log = (Logger) LoggerFactory.getLogger(BaseTest.class);
     private static final BufferedLogAppender bufferedLogAppender = new BufferedLogAppender();
+    private static volatile boolean loggingInitialized = false;
 
     static {
-        bufferedLogAppender.start();
-        ((ch.qos.logback.classic.Logger) LoggerFactory.getLogger("ROOT")).addAppender(bufferedLogAppender);
+        synchronized (BaseTest.class) {
+            if (!loggingInitialized) {
+                bufferedLogAppender.start();
+                Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+                rootLogger.detachAndStopAllAppenders(); // Remove existing appenders
+                rootLogger.addAppender(bufferedLogAppender);
+                loggingInitialized = true;
+            }
+        }
     }
 
     @BeforeAll
