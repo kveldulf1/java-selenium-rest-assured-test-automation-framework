@@ -21,6 +21,7 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
     }
 
     public String getAndClearLogs(String testName) {
-        return logBuffers.remove(testName).toString();
+        StringBuilder logs = logBuffers.remove(testName);
+        return logs != null ? logs.toString() : "";
     }
 } 
