@@ -34,10 +34,10 @@ public class BaseTest {
     public void setup(TestInfo testInfo) {
         MDC.put("testName", testInfo.getDisplayName());
         log.info("Starting test: {}", testInfo.getDisplayName());
-        log.info("Starting browser setup");
+        log.debug("Starting browser setup");
         try {
             driver = new BrowserFactory().createInstance(configuration);
-            log.info("Browser started successfully");
+            log.debug("Browser started successfully");
         } catch (NoSuchBrowserException e) {
             log.error("Failed to start browser", e);
             throw new RuntimeException(e);
@@ -47,7 +47,7 @@ public class BaseTest {
     @AfterEach
     public void tearDown(TestInfo testInfo) {
         log.info("Finished test: {}", testInfo.getDisplayName());
-        log.info("Closing browser");
+        log.debug("Closing browser");
         driver.quit();
         System.out.println(bufferedLogAppender.getAndClearLogs(testInfo.getDisplayName()));
         MDC.clear();

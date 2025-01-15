@@ -35,9 +35,6 @@ public class ApiBaseTest {
 
         // 3. Filter for logging
         filters(new RequestLoggingFilter(LogDetail.ALL),
-                new ResponseLoggingFilter(LogDetail.ALL));
-
-                
-        log.info("API test setup completed");
+                new ResponseLoggingFilter(LogDetail.ALL));                
     }
 }
