@@ -2,6 +2,7 @@ import helpers.BrowserFactory;
 import helpers.ConfigurationReader;
 import helpers.NoSuchBrowserException;
 import helpers.BufferedLogAppender;
+import helpers.LoggerManager;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -18,20 +19,6 @@ public class BaseTest {
     protected WebDriver driver;
     private static final ConfigurationReader configuration = ConfigurationReader.getInstance();
     private static final Logger log = (Logger) LoggerFactory.getLogger(BaseTest.class);
-    private static final BufferedLogAppender bufferedLogAppender = new BufferedLogAppender();
-    private static volatile boolean loggingInitialized = false;
-
-    static {
-        synchronized (BaseTest.class) {
-            if (!loggingInitialized) {
-                bufferedLogAppender.start();
-                Logger rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-                rootLogger.detachAndStopAllAppenders(); // Remove existing appenders
-                rootLogger.addAppender(bufferedLogAppender);
-                loggingInitialized = true;
-            }
-        }
-    }
 
     @BeforeAll
     public static void loadConfiguration() {
@@ -57,7 +44,7 @@ public class BaseTest {
         log.info("Finished test: {}", testInfo.getDisplayName());
         log.debug("Closing browser");
         driver.quit();
-        System.out.println(bufferedLogAppender.getAndClearLogs(testInfo.getDisplayName()));
+        System.out.println(LoggerManager.getAndClearLogs(testInfo.getDisplayName()));
         MDC.clear();
     }
 
