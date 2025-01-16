@@ -1,7 +1,6 @@
 import helpers.BrowserFactory;
 import helpers.ConfigurationReader;
 import helpers.NoSuchBrowserException;
-import helpers.BufferedLogAppender;
 import helpers.LoggerManager;
 
 import org.junit.jupiter.api.AfterEach;
@@ -19,10 +18,25 @@ public class BaseTest {
     protected WebDriver driver;
     private static final ConfigurationReader configuration = ConfigurationReader.getInstance();
     private static final Logger log = (Logger) LoggerFactory.getLogger(BaseTest.class);
+    private static volatile boolean globalSetupDone = false;
+    private static final Object SETUP_LOCK = new Object();
 
     @BeforeAll
-    public static void loadConfiguration() {
-        log.info("Loading test configuration");
+    public static void globalSetup() {
+        synchronized (SETUP_LOCK) {
+            if (!globalSetupDone) {
+                MDC.put("testName", "GlobalSetup");
+                log.info("Loading test configuration");
+                log.info("Cleaning database");
+                given()
+                    .when()
+                    .get("http://localhost:3000/api/restoreDB")
+                    .then()
+                    .statusCode(201);
+                LoggerManager.printGlobalLogs();
+                globalSetupDone = true;
+            }
+        }
     }
 
     @BeforeEach
@@ -46,11 +60,5 @@ public class BaseTest {
         driver.quit();
         System.out.println(LoggerManager.getAndClearLogs(testInfo.getDisplayName()));
         MDC.clear();
-    }
-
-    @BeforeAll
-    public static void cleanDatabase() {
-        log.info("Cleaning database");
-        given().when().get("http://localhost:3000/api/restoreDB").then().statusCode(201);
     }
 }
