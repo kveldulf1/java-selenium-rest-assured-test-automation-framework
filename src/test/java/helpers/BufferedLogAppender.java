@@ -18,10 +18,12 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
         String testName = MDC.get("testName");
         if (testName != null) {
             String logKey = testName + event.getFormattedMessage();
-            if (processedLogs.add(logKey)) {  // Only append if this exact log hasn't been seen
+            if (processedLogs.add(logKey)) {
                 logBuffers.computeIfAbsent(testName, k -> new StringBuilder())
-                         .append(event.getFormattedMessage())
-                         .append(System.lineSeparator());
+                         .append(String.format("%s [%s] %s%n", 
+                             event.getLevel(),
+                             testName, 
+                             event.getFormattedMessage()));
             }
         }
     }
@@ -29,19 +31,9 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
     public String getAndClearLogs(String testName) {
         StringBuilder logs = logBuffers.remove(testName);
         if (logs != null) {
-            // Clear processed logs for this test
             processedLogs.removeIf(key -> key.startsWith(testName));
-            return formatLogs(logs.toString(), testName);
+            return logs.toString();
         }
         return "";
-    }
-
-    private String formatLogs(String logs, String testName) {
-        StringBuilder formattedLogs = new StringBuilder();
-        String[] logLines = logs.split(System.lineSeparator());
-        for (String line : logLines) {
-            formattedLogs.append(String.format("%s [%s] %s%n", "INFO", testName, line));
-        }
-        return formattedLogs.toString();
     }
 } 
