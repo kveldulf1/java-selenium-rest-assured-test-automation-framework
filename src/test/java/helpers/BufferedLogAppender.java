@@ -20,7 +20,7 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
             String logKey = testName + event.getFormattedMessage();
             if (processedLogs.add(logKey)) {
                 logBuffers.computeIfAbsent(testName, k -> new StringBuilder())
-                         .append(String.format("%s [%s] %s%n", 
+                         .append(String.format("[%s] [%s] %s%n", 
                              event.getLevel(),
                              testName, 
                              event.getFormattedMessage()));
