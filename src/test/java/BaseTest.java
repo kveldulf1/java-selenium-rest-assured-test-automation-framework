@@ -26,8 +26,8 @@ public class BaseTest {
         synchronized (SETUP_LOCK) {
             if (!globalSetupDone) {
                 MDC.put("testName", "GlobalSetup");
-                log.info("[{}] Loading test configuration", "INFO");
-                log.info("[{}] Cleaning database", "INFO");
+                log.info("Loading test configuration");
+                log.info("Cleaning database");
                 given()
                     .when()
                     .get("http://localhost:3000/api/restoreDB")
