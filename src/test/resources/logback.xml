@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!-- Suppress Logback's internal status messages -->
-    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
-
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%level [%thread] [%logger{0}] %msg%n</pattern>
+            <pattern>[%level] %msg%n</pattern>
         </encoder>
     </appender>
-
+    
     <appender name="BUFFERED" class="helpers.BufferedLogAppender">
-        <!-- Remove encoder since BufferedLogAppender doesn't use it -->
+        <encoder>
+            <pattern>[%level] [%X{testName}] %msg%n</pattern>
+        </encoder>
     </appender>
 
     <root level="DEBUG">

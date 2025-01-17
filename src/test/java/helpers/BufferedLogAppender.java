@@ -19,11 +19,17 @@ public class BufferedLogAppender extends AppenderBase<ILoggingEvent> {
         if (testName != null) {
             String logKey = testName + event.getFormattedMessage();
             if (processedLogs.add(logKey)) {
+                String logMessage = String.format("[%s] [%s] %s%n", 
+                    event.getLevel(), 
+                    testName, 
+                    event.getFormattedMessage());
+                // Apply red color for ERROR level logs
+                if (event.getLevel() == ch.qos.logback.classic.Level.ERROR) {
+                    logMessage = "\u001B[31m" + logMessage + "\u001B[0m"; // Red color
+                }
+
                 logBuffers.computeIfAbsent(testName, k -> new StringBuilder())
-                         .append(String.format("[%s] [%s] %s%n", 
-                             event.getLevel(),
-                             testName, 
-                             event.getFormattedMessage()));
+                         .append(logMessage);
             }
         }
     }
