@@ -107,14 +107,14 @@ public class TestDataReader {
     @ResourceLock(value = "validUsers", mode = ResourceAccessMode.READ_WRITE)
     public static JsonObject getRandomValidUser() {
         try {
-            logger.debug("Thread {} requesting user", Thread.currentThread().getId());
+            logger.debug("Thread {} requesting user", Thread.currentThread().threadId());
             JsonObject user = UserPool.acquireUser();
             logger.debug("Thread {} received user: {}", 
-                Thread.currentThread().getId(), 
+                Thread.currentThread().threadId(), 
                 user.get("email").getAsString());
             return user;
         } catch (InterruptedException e) {
-            logger.error("Thread {} failed to acquire user", Thread.currentThread().getId(), e);
+            logger.error("Thread {} failed to acquire user", Thread.currentThread().threadId(), e);
             throw new RuntimeException("Failed to acquire user", e);
         }
     }
@@ -129,11 +129,11 @@ public class TestDataReader {
 
     public static void releaseUser(JsonObject user) {
         logger.debug("Thread {} preparing to release user: {}", 
-            Thread.currentThread().getId(), 
+            Thread.currentThread().threadId(), 
             user.get("email").getAsString());
         UserPool.releaseUser(user);
         logger.debug("Thread {} successfully released user: {}", 
-            Thread.currentThread().getId(), 
+            Thread.currentThread().threadId(), 
             user.get("email").getAsString());
     }
 }
