@@ -57,6 +57,8 @@ public class CommonApiCalls {
                 .extract()
                 .as(CreateUserResponse.class);
 
+        confirmUserWasCreated(response.getId().intValue());
+
         logger.info("Created user with email: {}", createUserRequest.getEmail());
         return response.getId().intValue();
     }
@@ -147,5 +149,15 @@ public class CommonApiCalls {
         driver.navigate().refresh();
         logger.info("Navigated to welcome page as logged in user with ID: {}", userId);
         return new WelcomePage(driver);
+    }
+
+    private void confirmUserWasCreated(int userId) {
+        logger.debug("Checking if user with ID {} exists", userId);
+        given()
+                .spec(RestAssuredConfig.getRequestSpec())
+                .when()
+                .get(ApiEndpoints.GET_USER_BY_ID, userId)
+                .then()
+                .statusCode(200);
     }
 }
