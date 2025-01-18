@@ -2,7 +2,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
-import static io.restassured.RestAssured.*;
 import config.RestAssuredConfig;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -18,6 +17,7 @@ public class ApiBaseTest {
     private static final Object CLEANUP_LOCK = new Object();
 
     @BeforeAll
+    // ResourceLock ensures that only one thread can access the RestAssured resource at a time.
     @ResourceLock(value = "RestAssured", mode = ResourceAccessMode.READ_WRITE)
     public static void setup() {
         log.info("Starting API test setup");
@@ -37,8 +37,10 @@ public class ApiBaseTest {
     }
 
     @BeforeEach
+    // ResourceLock ensures that only one thread can access the RestAssured resource at a time.
     @ResourceLock(value = "RestAssured", mode = ResourceAccessMode.READ_WRITE)
     public void setupTest() {
+        // Synchronized block ensures thread safety when accessing the CLEANUP_LOCK object.
         synchronized (CLEANUP_LOCK) {
             // Set request/response specifications for each test
             RestAssured.requestSpecification = RestAssuredConfig.getRequestSpec();
@@ -53,6 +55,7 @@ public class ApiBaseTest {
     }
 
     private static void cleanupDatabaseIfNeeded() {
+        // Synchronized block ensures thread safety when accessing the CLEANUP_LOCK object.
         synchronized (CLEANUP_LOCK) {
             if (!databaseCleaned) {
                 try {

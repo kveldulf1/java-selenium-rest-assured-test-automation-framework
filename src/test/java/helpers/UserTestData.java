@@ -34,6 +34,11 @@ public class UserTestData {
         return usersData.getAsJsonObject("defaultTestUser");
     }
     
+    /**
+     * ResourceLock ensures that only one thread can access the validUsers resource at a time.
+     * READ_WRITE mode indicates this method both reads from and modifies the validUsers resource,
+     * preventing concurrent access that could lead to race conditions.
+     */
     @ResourceLock(value = "validUsers", mode = ResourceAccessMode.READ_WRITE)
     public static JsonObject getRandomValidUser() {
         JsonArray users = usersData.getAsJsonArray("validUsers");
@@ -45,12 +50,14 @@ public class UserTestData {
     
     public static JsonObject getInvalidUser() {
         JsonArray users = usersData.getAsJsonArray("invalidUsers");
+        // Return a random invalid user from the list of invalid users.
         return users.get((int) (Math.random() * users.size()))
             .getAsJsonObject();
     }
     
     public static String getEmail(JsonObject user) {
         return Optional.ofNullable(user.get("email"))
+            // Resolve dynamic values in the email field.
             .map(e -> TestDataReader.resolveDynamicValues(e.getAsString()))
             .orElse("");
     }
