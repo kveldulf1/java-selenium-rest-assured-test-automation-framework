@@ -13,6 +13,13 @@ import org.slf4j.LoggerFactory;
 public class BrowserFactory {
     private static final Logger log = (Logger) LoggerFactory.getLogger(BrowserFactory.class);
 
+    /**
+     * Creates a WebDriver instance based on the configuration.
+     * 
+     * @param config The configuration object containing browser type and other settings.
+     * @return A WebDriver instance.
+     * @throws NoSuchBrowserException If the specified browser type is not supported.
+     */
     public WebDriver createInstance(ConfigurationReader config) throws NoSuchBrowserException {
         String browserType = config.getBrowser();
         log.debug("Creating {} browser instance", browserType);

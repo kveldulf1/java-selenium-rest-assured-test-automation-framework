@@ -51,7 +51,7 @@ public class BaseTest {
     @BeforeEach
     public void setup(TestInfo testInfo) {
         // Adds a key-value pair to the Mapped Diagnostic Context (MDC), which is used
-        // for logging. It helps identify logs related to the current test. 
+        // for logging. It helps identify logs related to the current test.
         MDC.put("testName", testInfo.getDisplayName());
         log.info("Starting test: {}", testInfo.getDisplayName());
         log.debug("Starting browser setup");
