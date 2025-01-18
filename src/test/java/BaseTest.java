@@ -69,7 +69,10 @@ public class BaseTest {
         log.info("Finished test: {}", testInfo.getDisplayName());
         log.debug("Closing browser");
         driver.quit();
+        // Prints the logs for the current test. This implementation is due to the
+        // parallel execution of tests.
         System.out.println(LoggerManager.getAndClearLogs(testInfo.getDisplayName()));
+        // Clears the MDC for the current thread, removing the testName key-value pair.
         MDC.clear();
     }
 }
