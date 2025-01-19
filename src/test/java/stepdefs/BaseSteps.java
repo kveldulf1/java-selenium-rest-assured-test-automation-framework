@@ -1,3 +1,5 @@
+package stepdefs;
+
 import org.openqa.selenium.WebDriver;
 import hooks.AppHooks;
 

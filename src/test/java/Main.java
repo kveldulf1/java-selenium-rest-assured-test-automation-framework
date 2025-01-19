@@ -1,5 +1,3 @@
-package tests;
-
 import utils.CommonApiCalls;
 
 public class Main {

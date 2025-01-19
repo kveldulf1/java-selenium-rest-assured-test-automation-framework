@@ -1,5 +1,3 @@
-package tests;
-
 import org.junit.jupiter.api.Test;
 import constants.ApiEndpoints;
 import pojo.users.CreateUserRequest;

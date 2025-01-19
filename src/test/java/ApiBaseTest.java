@@ -1,5 +1,3 @@
-package tests;
-
 import org.junit.jupiter.api.BeforeAll;
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
