@@ -1,9 +1,6 @@
-Feature: Login Tests
+Feature: Login functionality
 
-Scenario: User logs in 
-
-Given User is on the main page
-When User hovers cursor over user icon
-And User clicks on the register button
-And User provides details and clicks on register button
-Then User created alert text should be displayed
+  Scenario: Successful login with random valid user
+    Given I am on the main page
+    When I login as random existing user
+    Then I should be on welcome page
