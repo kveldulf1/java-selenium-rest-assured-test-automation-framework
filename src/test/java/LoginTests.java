@@ -45,7 +45,7 @@ public class LoginTests extends BaseTest {
                                 .getAlertText();
 
                 Assertions.assertTrue(alertText.contains("Invalid username or password"),
-                                "Alert text does not contain 'Invalid email or password'");
+                                "Alert text does not contain 'I'");
         
         }
 

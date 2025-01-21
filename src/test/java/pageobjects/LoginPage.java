@@ -67,6 +67,14 @@ public class LoginPage extends BasePage {
         return this;
     }
 
+    public LoginPage provideInvalidCredentials() {
+        JsonObject invalidUser = TestDataReader.getInvalidUser();
+        log.info("Attempting login with invalid user: {}", invalidUser.get("email").getAsString());
+        typeUsername(invalidUser.get("email").getAsString());
+        typePassword(invalidUser.get("password").getAsString());
+        return this;
+    }
+
     public String getAlertText() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("p[data-testid='login-error']")));
         String alertText = driver.findElement(By.cssSelector("p[data-testid='login-error']")).getText();

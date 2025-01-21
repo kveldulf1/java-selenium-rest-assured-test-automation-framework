@@ -23,9 +23,4 @@ public class UserMenuSteps extends BaseSteps {
     public void I_click_on_login_button_on_user_menu_component() {
         userMenu.clickLoginButton();
     }
-
-    @When("I click on register button on user menu component")
-    public void I_click_on_register_button_on_user_menu_component() {
-        userMenu.clickOnRegisterButton();
-    }
 }

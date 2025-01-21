@@ -3,7 +3,7 @@ Feature: Login functionality
 Background:
   Given I am on the main page 
 
-  @Test1
+  @RegisterUser
   Scenario Outline: New user is able to register from main page
     When I hover mouse over user icon
     And I click on register button on user menu component
@@ -19,11 +19,19 @@ Background:
       | John      | Doe      | john.doe@test.com   | password1 |
       | Jane      | Smith    | jane.smith@test.com | password2 |
 
-  @Test2
+  @UserLogsIn
   Scenario: Successful login from main page with random valid user
     When I hover mouse over user icon
     And I click on login button on user menu component
     And I provide valid credentials for random existing user
     And I click on login button on login page
     Then I should be on welcome page
+
+  @UserLogsInWithInvalidUser
+  Scenario: Unsuccessful login from main page with invalid user credentials
+    When I hover mouse over user icon
+    And I click on login button on user menu component
+    And I provide invalid credentials
+    And I click on login button on login page
+    Then Alert text should contains "Invalid username or password"
 

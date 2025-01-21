@@ -2,6 +2,7 @@ package stepdefs;
 
 import io.cucumber.java.en.*;
 import pageobjects.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LoginSteps extends BaseSteps {
 
@@ -24,5 +25,15 @@ public class LoginSteps extends BaseSteps {
     @When("I click on login button on login page")
     public void i_click_on_login_button_on_login_page() {
         loginPage.clickLoginButton();
+    }
+
+    @When("I provide invalid credentials")
+    public void I_provide_invalid_credentials() {
+        loginPage.provideInvalidCredentials();
+    }
+
+    @Then("Alert text should contains {string}")
+    public void Alert_text_should_contains(String alertText) {
+        assertTrue(loginPage.getAlertText().contains(alertText));
     }
 } 
