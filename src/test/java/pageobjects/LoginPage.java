@@ -49,6 +49,14 @@ public class LoginPage extends BasePage {
         );
     }
 
+    public LoginPage provideValidCredentialsForRandomExistingUser() {
+        JsonObject randomUser = TestDataReader.getRandomValidUser();
+        log.info("Logging in as random valid user: {}", randomUser.get("email").getAsString());
+        typeUsername(randomUser.get("email").getAsString());
+        typePassword(randomUser.get("password").getAsString());
+        return this;
+    }
+
     public LoginPage loginAsInvalidUser() {
         JsonObject invalidUser = TestDataReader.getInvalidUser();
         log.info("Attempting login with invalid user: {}", invalidUser.get("email").getAsString());
@@ -64,5 +72,12 @@ public class LoginPage extends BasePage {
         String alertText = driver.findElement(By.cssSelector("p[data-testid='login-error']")).getText();
         log.info("Alert text: {}", alertText);
         return alertText;
+    }
+
+    public LoginPage clickLoginButton() {
+        wait.until(ExpectedConditions.elementToBeClickable(loginButton));
+        driver.findElement(loginButton).click();
+        log.info("Login button clicked");
+        return this;
     }
 }
