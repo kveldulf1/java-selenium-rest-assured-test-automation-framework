@@ -36,4 +36,7 @@ public class LoginSteps extends BaseSteps {
     public void Alert_text_should_contains(String alertText) {
         assertTrue(loginPage.getAlertText().contains(alertText));
     }
+
+  
+   
 } 
