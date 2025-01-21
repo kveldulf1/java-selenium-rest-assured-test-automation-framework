@@ -31,31 +31,31 @@ public class RegisterPage extends BasePage {
         return result;
     }
 
-    private void typeUsername(String username) {
+    public void typeUsername(String username) {
         wait.until(ExpectedConditions.elementToBeClickable(usernameInput));
         driver.findElement(usernameInput).sendKeys(username);
         log.debug("Typed username: {}", username);
     }
 
-    private void typeLastname(String lastname) {
+    public void typeLastname(String lastname) {
         wait.until(ExpectedConditions.elementToBeClickable(lastnameInput));
         driver.findElement(lastnameInput).sendKeys(lastname);
         log.debug("Typed lastname: {}", lastname);
     }
 
-    private void typeEmail(String email) {
+    public void typeEmail(String email) {
         wait.until(ExpectedConditions.elementToBeClickable(emailInput));
         driver.findElement(emailInput).sendKeys(email);
         log.debug("Typed email: {}", email);
     }
 
-    private void typePassword(String password) {
+    public void typePassword(String password) {
         wait.until(ExpectedConditions.elementToBeClickable(passwordInput));
         driver.findElement(passwordInput).sendKeys(password);
         log.debug("Typed password: {}", "*".repeat(password.length()));
     }
 
-    private void clickRegisterButton() {
+    public void clickRegisterButton() {
         wait.until(ExpectedConditions.elementToBeClickable(registerButton));
         driver.findElement(registerButton).click();
         log.debug("Clicked register button");

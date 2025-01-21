@@ -11,7 +11,7 @@ public class MainPageSteps extends BaseSteps {
         this.mainPage = new MainPage(driver);
     }
 
-    @When("I am on the main page")
+    @Given("I am on the main page")
     public void i_am_on_main_page() {
         mainPage.go();
     }
