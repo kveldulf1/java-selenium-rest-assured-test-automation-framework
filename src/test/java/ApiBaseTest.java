@@ -32,11 +32,9 @@ public class ApiBaseTest {
         requestSpecification = RestAssuredConfig.getRequestSpec();
         responseSpecification = RestAssuredConfig.getResponseSpec();
 
-
         // 3. Filter for logging
         filters(new RequestLoggingFilter(LogDetail.ALL),
                 new ResponseLoggingFilter(LogDetail.ALL));
-
                 
         log.info("API test setup completed");
     }
