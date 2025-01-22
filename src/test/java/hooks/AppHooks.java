@@ -21,7 +21,7 @@ public class AppHooks {
         RestAssuredConfig.setup();
     }
     
-    @Before("@Api")
+    @Before
     public void apiSetup() {
         // Database cleanup for API tests
         given()
@@ -32,7 +32,7 @@ public class AppHooks {
             .statusCode(201);
     }
     
-    @Before("not @Api")
+    @Before("not @Api") // ensures that api tests are not initializing browser instance
     public void uiSetup() {
         BrowserFactory browser = new BrowserFactory();
         try {
@@ -42,7 +42,7 @@ public class AppHooks {
         }
     }
     
-    @After("not @Api")
+    @After("not @Api") // ensures that api tests are not closing browser instance
     public void tearDown() {
         if (driver != null) {
             driver.quit();
