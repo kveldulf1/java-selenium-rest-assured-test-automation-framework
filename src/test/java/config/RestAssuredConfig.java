@@ -26,36 +26,32 @@ public class RestAssuredConfig {
      */
     public static void setup() {
         log.info("Starting API configuration setup");
-        
-        // 1. Create initial request spec for database cleanup
-        RequestSpecification initialSpec = new RequestSpecBuilder()
-                .setBaseUri(BASE_URI)
-                .setContentType(ContentType.JSON)
-                .setAccept(ContentType.JSON)
-                .build();
-        
-
-        // 2. Configure main request specification
+        configureSpecifications();
+        configureLogging();
+        log.info("API configuration setup completed");
+    }
+    
+    private static void configureSpecifications() {     
+        // 1. Configure main request specification
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
                 .build();
                 
-        // 3. Response configuration
+        // 2. Response configuration
         responseSpec = new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .build();
 
-        // 4. Configure RestAssured defaults
+        // 3. Configure RestAssured defaults
         requestSpecification = requestSpec;
         responseSpecification = responseSpec;
-
-        // 5. Add logging filters
+    }
+    
+    private static void configureLogging() {
         filters(new RequestLoggingFilter(LogDetail.ALL),
                 new ResponseLoggingFilter(LogDetail.ALL));
-                
-        log.info("API configuration setup completed");
     }
     
     /**

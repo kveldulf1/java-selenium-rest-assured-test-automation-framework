@@ -3,16 +3,13 @@ package stepdefs;
 import io.cucumber.java.en.*;
 import pojo.authentication.LoginRequest;
 import api.authentication.AuthenticationApi;
-import com.google.gson.JsonObject;
 import utils.CommonApiCalls;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthenticationApiSteps extends BaseApiSteps {
     
-    private JsonObject validUser;
     private LoginRequest loginRequest;
     
-
     @Given("I have valid user credentials")
     public void I_have_valid_user_credentials() {
         loginRequest = new CommonApiCalls().getValidUserCredentials();
