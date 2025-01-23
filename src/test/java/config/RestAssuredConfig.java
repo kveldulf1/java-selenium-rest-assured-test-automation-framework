@@ -34,36 +34,24 @@ public class RestAssuredConfig {
                 .setAccept(ContentType.JSON)
                 .build();
         
-        // 2. Database cleanup
-        try {
-            given()
-                    .spec(initialSpec)
-                    .when()
-                    .get("/restoreDB")
-                    .then()
-                    .statusCode(201);
-        } catch (Exception e) {
-            log.error("Failed to clean database", e);
-            throw new RuntimeException("API setup failed - couldn't clean database", e);
-        }
 
-        // 3. Configure main request specification
+        // 2. Configure main request specification
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON)
                 .build();
                 
-        // 4. Response configuration
+        // 3. Response configuration
         responseSpec = new ResponseSpecBuilder()
                 .expectContentType(ContentType.JSON)
                 .build();
 
-        // 5. Configure RestAssured defaults
+        // 4. Configure RestAssured defaults
         requestSpecification = requestSpec;
         responseSpecification = responseSpec;
 
-        // 6. Add logging filters
+        // 5. Add logging filters
         filters(new RequestLoggingFilter(LogDetail.ALL),
                 new ResponseLoggingFilter(LogDetail.ALL));
                 

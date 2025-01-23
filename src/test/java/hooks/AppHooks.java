@@ -22,7 +22,7 @@ public class AppHooks {
     }
     
     @Before
-    public void apiSetup() {
+    public void cleanDatabase() {
         // Database cleanup for API tests
         given()
             .spec(RestAssuredConfig.getRequestSpec())
