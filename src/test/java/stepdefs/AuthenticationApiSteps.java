@@ -1,29 +1,21 @@
 package stepdefs;
 
 import io.cucumber.java.en.*;
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import pojo.authentication.LoginRequest;
-import constants.ApiEndpoints;
-import helpers.UserTestData;
 import api.AuthenticationApi;
 import com.google.gson.JsonObject;
-
-import static io.restassured.RestAssured.given;
+import utils.CommonApiCalls;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AuthenticationApiSteps extends BaseApiSteps {
     
     private JsonObject validUser;
     private LoginRequest loginRequest;
+    
 
     @Given("I have valid user credentials")
     public void I_have_valid_user_credentials() {
-        validUser = UserTestData.getRandomValidUser();
-        loginRequest = new LoginRequest(
-            UserTestData.getEmail(validUser),
-            UserTestData.getPassword(validUser)
-        );
+        loginRequest = new CommonApiCalls().getValidUserCredentials();
     }
 
     @When("I send POST login request")

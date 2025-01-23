@@ -3,6 +3,7 @@ package utils;
 import static io.restassured.RestAssured.given;
 import constants.ApiEndpoints;
 import helpers.TestDataReader;
+import helpers.UserTestData;
 import pageobjects.WelcomePage;
 import pojo.authentication.LoginRequest;
 import pojo.users.CreateUserRequest;
@@ -14,6 +15,7 @@ import ch.qos.logback.classic.Logger;
 import helpers.LoggerManager;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import com.google.gson.JsonObject;
 
 /**
  * Utility class for common API operations like user creation, login, and deletion
@@ -103,6 +105,18 @@ public class CommonApiCalls {
     }
 
     /**
+     * Creates a LoginRequest with credentials from a random valid user
+     * @return LoginRequest object with valid credentials
+     */
+    public LoginRequest getValidUserCredentials() {
+        JsonObject validUser = UserTestData.getRandomValidUser();
+        return new LoginRequest(
+            UserTestData.getEmail(validUser),
+            UserTestData.getPassword(validUser)
+        );
+    }
+
+    /**
      * Sets authentication cookies in the browser for a user
      * Creates auth token if not present
      * @param driver WebDriver instance
@@ -113,6 +127,7 @@ public class CommonApiCalls {
         if (accessToken == null) {
             logInAndGetAccessTokenForUser(userId);
         } 
+
         record CookieData(String name, String value) {
         }
 
