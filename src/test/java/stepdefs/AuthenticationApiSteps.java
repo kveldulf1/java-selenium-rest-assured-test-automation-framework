@@ -2,7 +2,7 @@ package stepdefs;
 
 import io.cucumber.java.en.*;
 import pojo.authentication.LoginRequest;
-import api.AuthenticationApi;
+import api.authentication.AuthenticationApi;
 import com.google.gson.JsonObject;
 import utils.CommonApiCalls;
 import static org.junit.jupiter.api.Assertions.*;
