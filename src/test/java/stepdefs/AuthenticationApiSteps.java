@@ -9,7 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AuthenticationApiSteps extends BaseApiSteps {
     
     private LoginRequest loginRequest;
+    private final AuthenticationApi authenticationApi;
     
+    public AuthenticationApiSteps() {
+        this.authenticationApi = new AuthenticationApi();
+    }
+
     @Given("I have valid user credentials")
     public void I_have_valid_user_credentials() {
         loginRequest = new CommonApiCalls().getValidUserCredentials();
@@ -17,7 +22,7 @@ public class AuthenticationApiSteps extends BaseApiSteps {
 
     @When("I send POST login request")
     public void iSendPostLoginRequest() {
-        response = AuthenticationApi.login(loginRequest);
+        response = authenticationApi.login(loginRequest);
     }
 
     @Then("I should receive status code {int}")
