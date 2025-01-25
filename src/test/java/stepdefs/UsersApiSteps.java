@@ -1,6 +1,7 @@
 package stepdefs;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import api.users.UsersApi;
 import io.cucumber.java.en.Given;
@@ -9,6 +10,11 @@ import io.cucumber.java.en.When;
 import pojo.users.CreateUserRequest;
 import utils.CommonApiCalls;
 import io.restassured.response.Response;
+import pojo.users.CreateUserResponse;
+import utils.TestContext;
+import pojo.users.UserResponse;
+import java.util.List;
+import java.util.Arrays;
 
 public class UsersApiSteps extends BaseApiSteps {
 
@@ -37,4 +43,25 @@ public class UsersApiSteps extends BaseApiSteps {
         response = usersApi.getUsers();
         testContext.setLastResponse(response);
     }
-}
+
+
+    @When("I retrive id value from response body")
+    public void I_retrive_id_value_from_response_body() {
+        CreateUserResponse userResponse = testContext.getLastResponse().as(CreateUserResponse.class);
+        Long userId = userResponse.getId();
+        testContext.setUserId(userId);
+    }
+   
+
+    @Then("Reponse body should contain id of created user")
+    public void Reponse_body_should_contain_id_of_created_user() {
+        List<UserResponse> users = Arrays.asList(testContext.getLastResponse().as(UserResponse[].class));
+        Long expectedId = testContext.getUserId();
+        boolean userFound = users.stream()
+            .anyMatch(user -> expectedId.equals(user.getId()));
+        
+        assertTrue(userFound, "Created user with ID " + expectedId + " not found in response");
+
+    }
+    }
+

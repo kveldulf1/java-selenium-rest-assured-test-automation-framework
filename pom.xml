@@ -23,7 +23,7 @@
             <artifactId>selenium-java</artifactId>
             <version>4.24.0</version>
         </dependency>
-            <dependency>
+        <dependency>
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.4.0</version>
