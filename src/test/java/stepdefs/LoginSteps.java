@@ -13,7 +13,7 @@ public class LoginSteps extends BaseSteps {
     }
 
     @When("I login as random existing user")
-    public void i_login_as_random_user() {
+    public void i_login_as_random_existing_user() {
         loginPage.loginAsRandomExistingUser();
     }
 
@@ -28,12 +28,12 @@ public class LoginSteps extends BaseSteps {
     }
 
     @When("I provide invalid credentials")
-    public void I_provide_invalid_credentials() {
+    public void i_provide_invalid_credentials() {
         loginPage.provideInvalidCredentials();
     }
 
     @Then("Alert text should contains {string}")
-    public void Alert_text_should_contains(String alertText) {
+    public void alert_text_should_contains(String alertText) {
         assertTrue(loginPage.getAlertText().contains(alertText));
     }
 

@@ -19,18 +19,18 @@ public class AuthenticationApiSteps extends BaseApiSteps {
     }
 
     @Given("I have valid user credentials")
-    public void I_have_valid_user_credentials() {
+    public void i_have_valid_user_credentials() {
         loginRequest = new CommonApiCalls().getValidUserCredentials();
     }
 
     @When("I send POST login request")
-    public void iSendPostLoginRequest() {
+    public void i_send_POST_login_request() {
         response = authenticationApi.login(loginRequest);
         testContext.setLastResponse(response);
     }
 
     @Then("Response should contain access token")
-    public void responseShouldContainAccessToken() {
+    public void response_should_contain_access_token() {
         String accessToken = response.jsonPath().getString("access_token");
         assertNotNull(accessToken, "Access token should not be null");
         assertFalse(accessToken.isEmpty(), "Access token should not be empty");
