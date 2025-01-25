@@ -18,4 +18,13 @@ public class UsersApi {
             .post(ApiEndpoints.CREATE_USER);
     }
 
+    public static Response getUsers(){
+        return given()
+        .spec(RestAssuredConfig.getRequestSpec())
+        .when()
+        .get(ApiEndpoints.GET_ALL_USERS);
+    }
+
+
+
 }

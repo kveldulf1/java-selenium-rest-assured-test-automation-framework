@@ -31,4 +31,10 @@ public class UsersApiSteps extends BaseApiSteps {
         response = usersApi.createUser(createUserRequest);
         testContext.setLastResponse(response);
     }
+
+    @When("I send GET request to users endpoint")
+    public void I_send_GET_request_to_users_endpoint() {
+        response = usersApi.getUsers();
+        testContext.setLastResponse(response);
+    }
 }
