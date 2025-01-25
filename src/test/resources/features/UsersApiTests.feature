@@ -9,7 +9,8 @@ Feature: Users endpoints tests
     Then Response code should be 201
     When I send GET request to users endpoint
     Then Response code should be 200
-    And Reponse body should contain id of created user
+    And Response body should contain id of created user
+  
 
   @GetUserApi
   Scenario: I get list of users

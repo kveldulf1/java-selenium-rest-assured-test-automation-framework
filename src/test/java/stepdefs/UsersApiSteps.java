@@ -9,12 +9,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pojo.users.CreateUserRequest;
 import utils.CommonApiCalls;
-import io.restassured.response.Response;
 import pojo.users.CreateUserResponse;
 import utils.TestContext;
-import pojo.users.UserResponse;
 import java.util.List;
-import java.util.Arrays;
 
 public class UsersApiSteps extends BaseApiSteps {
 
@@ -51,17 +48,14 @@ public class UsersApiSteps extends BaseApiSteps {
         Long userId = userResponse.getId();
         testContext.setUserId(userId);
     }
-   
 
-    @Then("Reponse body should contain id of created user")
-    public void Reponse_body_should_contain_id_of_created_user() {
-        List<UserResponse> users = Arrays.asList(testContext.getLastResponse().as(UserResponse[].class));
+    @Then("Response body should contain id of created user")
+    public void response_body_should_contain_id_of_created_user() {
         Long expectedId = testContext.getUserId();
-        boolean userFound = users.stream()
-            .anyMatch(user -> expectedId.equals(user.getId()));
+        List<Integer> userIds = testContext.getLastResponse().jsonPath().getList("id");
         
-        assertTrue(userFound, "Created user with ID " + expectedId + " not found in response");
-
+        assertTrue(userIds.contains(expectedId.intValue()), 
+            "Created user with ID " + expectedId + " not found in response");
     }
     }
 
