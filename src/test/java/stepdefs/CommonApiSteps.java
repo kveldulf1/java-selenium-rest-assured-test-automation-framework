@@ -1,6 +1,5 @@
 package stepdefs;
 
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.Assertions;
 import utils.CommonApiCalls;

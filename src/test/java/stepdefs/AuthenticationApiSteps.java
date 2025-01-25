@@ -25,6 +25,7 @@ public class AuthenticationApiSteps extends BaseApiSteps {
     @When("I send POST login request")
     public void iSendPostLoginRequest() {
         response = authenticationApi.login(loginRequest);
+        testContext.setLastResponse(response);
     }
 
     @Then("Response should contain access token")
