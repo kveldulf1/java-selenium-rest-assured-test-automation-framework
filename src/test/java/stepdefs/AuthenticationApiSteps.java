@@ -34,11 +34,4 @@ public class AuthenticationApiSteps extends BaseApiSteps {
         assertNotNull(accessToken, "Access token should not be null");
         assertFalse(accessToken.isEmpty(), "Access token should not be empty");
     }
-
-    @When("I login with valid credentials")
-    public void iLoginWithValidCredentials() {
-        LoginRequest request = new LoginRequest("valid@email.com", "validPassword");
-        testContext.setLastResponse(authenticationApi.login(request));
-    }
-
 } 
