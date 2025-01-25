@@ -10,8 +10,10 @@ public class AuthenticationApiSteps extends BaseApiSteps {
     
     private LoginRequest loginRequest;
     private final AuthenticationApi authenticationApi;
+    private final TestContext testContext;
     
-    public AuthenticationApiSteps() {
+    public AuthenticationApiSteps(TestContext testContext) {
+        this.testContext = testContext;
         this.authenticationApi = new AuthenticationApi();
     }
 
@@ -25,16 +27,17 @@ public class AuthenticationApiSteps extends BaseApiSteps {
         response = authenticationApi.login(loginRequest);
     }
 
-    @Then("I should receive status code {int}")
-    public void iShouldReceiveStatusCode(int expectedStatusCode) {
-        assertEquals(expectedStatusCode, response.getStatusCode());
-    }
-
     @Then("Response should contain access token")
     public void responseShouldContainAccessToken() {
         String accessToken = response.jsonPath().getString("access_token");
         assertNotNull(accessToken, "Access token should not be null");
         assertFalse(accessToken.isEmpty(), "Access token should not be empty");
+    }
+
+    @When("I login with valid credentials")
+    public void iLoginWithValidCredentials() {
+        LoginRequest request = new LoginRequest("valid@email.com", "validPassword");
+        testContext.setLastResponse(authenticationApi.login(request));
     }
 
 } 
