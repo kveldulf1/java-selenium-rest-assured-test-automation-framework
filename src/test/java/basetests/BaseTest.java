@@ -1,3 +1,4 @@
+package basetests;
 import helpers.BrowserFactory;
 import helpers.ConfigurationReader;
 import helpers.NoSuchBrowserException;
