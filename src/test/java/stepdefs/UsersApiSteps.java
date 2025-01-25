@@ -29,11 +29,6 @@ public class UsersApiSteps extends BaseApiSteps {
     @When("I send POST create user request")
     public void I_send_POST_create_user_request() {
         response = usersApi.createUser(createUserRequest);
-    }
-
-    @When("I create a new user")
-    public void iCreateANewUser() {
-        CreateUserRequest request = new CommonApiCalls().prepareUserRequest();
-        testContext.setLastResponse(usersApi.createUser(request));
+        testContext.setLastResponse(response);
     }
 }
