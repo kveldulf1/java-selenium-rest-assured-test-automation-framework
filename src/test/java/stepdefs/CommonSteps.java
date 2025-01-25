@@ -9,5 +9,4 @@ public class CommonSteps extends BaseSteps {
     public void I_am_on_the_welcome_page_as_logged_in_user() {
         new CommonApiCalls().goToWelcomePageAsLoggedInUser(driver);
     }
-
 }

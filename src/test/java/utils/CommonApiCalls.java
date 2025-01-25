@@ -25,12 +25,11 @@ public class CommonApiCalls {
     private static String accessToken;
     private CreateUserRequest currentUser;
 
+
     /**
-     * Creates a new user via API
-     * Replaces timestamp placeholder in email if present
-     * @return ID of the created user
+     * This method prepares a CreateUserRequest object with data for a new user
      */
-    public int createUser() {
+        public CreateUserRequest prepareUserRequest() {
         currentUser = TestDataReader.getTestData("users", CreateUserRequest.class);
         String timestamp = String.valueOf(System.currentTimeMillis());
         
@@ -48,6 +47,16 @@ public class CommonApiCalls {
         
         // Update currentUser with the actual email address used in the request
         currentUser = createUserRequest;
+        return createUserRequest;
+    }
+
+    /**
+     * Creates a new user via API
+     * Replaces timestamp placeholder in email if present
+     * @return ID of the created user
+     */
+    public int createUser() {
+        CreateUserRequest createUserRequest = prepareUserRequest();
 
         CreateUserResponse response = given()
                 .spec(RestAssuredConfig.getRequestSpec())

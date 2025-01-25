@@ -36,4 +36,5 @@ public class AuthenticationApiSteps extends BaseApiSteps {
         assertNotNull(accessToken, "Access token should not be null");
         assertFalse(accessToken.isEmpty(), "Access token should not be empty");
     }
+
 } 
