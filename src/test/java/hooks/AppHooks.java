@@ -8,12 +8,18 @@ import helpers.ConfigurationReader;
 import helpers.NoSuchBrowserException;
 import org.openqa.selenium.WebDriver;
 import config.RestAssuredConfig;
+import utils.TestContext;
 
 import static io.restassured.RestAssured.given;
 
 public class AppHooks {
     private static ConfigurationReader configuration;
     private static WebDriver driver;
+    private final TestContext testContext;
+    
+    public AppHooks(TestContext testContext) {
+        this.testContext = testContext;
+    }
     
     @BeforeAll
     public static void globalSetup() {
@@ -23,7 +29,7 @@ public class AppHooks {
     
     @Before
     public void cleanDatabase() {
-        // Database cleanup for API tests
+        // Database cleanup to ensure a clean application state for each test.
         given()
             .spec(RestAssuredConfig.getRequestSpec())
             .when()
@@ -47,6 +53,12 @@ public class AppHooks {
         if (driver != null) {
             driver.quit();
         }
+    }
+    
+    // Clean the test context after each test.
+    @After
+    public void cleanContext() {
+        testContext.clear();
     }
     
     public static WebDriver getDriver() {
