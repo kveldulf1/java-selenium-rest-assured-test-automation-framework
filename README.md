@@ -16,6 +16,8 @@ This framework is actively being developed. Planned improvements include:
 
 ### [cucumber-tests](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/cucumber-tests)
 - Single-threaded execution
+- Page Object Model implementation
+- Service Object Model implementation
 - BDD implementation with Cucumber
 - Cucumber HTML reporting
 - Step definitions and feature files
