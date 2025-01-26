@@ -7,7 +7,7 @@ This framework is actively being developed. Planned improvements include:
 - Enhanced architectural patterns
 - Expanded test coverage
 - Additional testing features
-- Performance optimizations
+- Jenkinsfile for CI/CD pipeline execution
 - More comprehensive documentation
 
 ## 🌿 Branches
@@ -16,11 +16,13 @@ This framework is actively being developed. Planned improvements include:
 
 ### [cucumber-tests](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/cucumber-tests)
 - Single-threaded execution
+- Page Object Model implementation
+- Service Object Model implementation
 - BDD implementation with Cucumber
 - Cucumber HTML reporting
 - Step definitions and feature files
 
-### [parallel-tests-logs-allure-reports](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/parallel-tests-logs-allure-reports)
+### [parallel-tests-allure](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/parallel-tests-allure)
 - Concurrent test execution
 - Resource locking for thread safety during parallel execution
 - Fluent chain pattern implementation
@@ -116,10 +118,33 @@ Test data is managed through JSON files in `src/test/resources/testdata/`:
 
 ## 📊 Reports
 
-HTML reports are generated at:
-target/cucumber-reports/report.html
+### Cucumber HTML Reports
+Generated at:
+`target/cucumber-reports/report.html`
 
-Allure reports are generated at:
+### Allure Reports
+Allure provides rich test reports with detailed test execution data, including steps, attachments, and timelines.
+
+#### Generate and View Reports
+Single command to run tests and view report:
+```powershell
+mvn clean test allure:report allure:serve
+```
+
+
+#### Report Locations
+- Allure results: `target/allure-results`
+- HTML report: `target/site/allure-report/index.html`
+
+#### Report Features
+- Test execution timeline
+- Detailed test steps and attachments
+- Environment information
+- Test categorization and filtering
+- Severity levels visualization
+- Test duration statistics
+- Failed test analysis
+- Screenshots for UI test failures
 
 ## 🔧 Framework Components
 
