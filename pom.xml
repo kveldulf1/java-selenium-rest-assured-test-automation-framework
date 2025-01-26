@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>groupId</groupId>
-    <artifactId>selenium-course</artifactId>
+    <groupId>com.kveldulf</groupId>
+    <artifactId>java-selenium-rest-assured-test-automation-framework</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <!-- Set the Java version to 21, Jenkins uses Java 21, newer versions are causing issues -->
