@@ -20,7 +20,7 @@ This framework is actively being developed. Planned improvements include:
 - Cucumber HTML reporting
 - Step definitions and feature files
 
-### [parallel-tests-logs-allure-reports](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/parallel-tests-logs-allure-reports)
+### [parallel-tests-allure](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/parallel-tests-allure)
 - Concurrent test execution
 - Resource locking for thread safety during parallel execution
 - Fluent chain pattern implementation
