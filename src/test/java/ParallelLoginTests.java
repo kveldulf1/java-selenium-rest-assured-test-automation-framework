@@ -9,6 +9,12 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 
+
+/**
+ * This class demonstrates parallel test execution capabilities and thread-safe test data handling.
+ * Multiple test instances run concurrently while safely managing shared test data through resource locking,
+ * preventing race conditions when accessing the same user credentials pool.
+ */
 @Epic("Authentication")
 @Feature("Parallel Login")
 public class ParallelLoginTests extends BaseTest {
