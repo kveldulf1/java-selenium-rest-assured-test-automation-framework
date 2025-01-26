@@ -63,19 +63,20 @@ The application will be available at `http://localhost:3000`
 - Maven 3.9.6
 - Cucumber HTML Reports 5.7.7
 
-##  Project Structure
+## 📁 Project Structure
+```
 src/test/java/
-├── api/ # API service layer
-├── config/ # Configuration classes
-├── constants/ # Constants and endpoints
-├── helpers/ # Utility classes
-├── hooks/ # Cucumber hooks
-├── pageobjects/ # Page Object Model classes
-├── pojo/ # Request/Response POJOs
-├── runner/ # Cucumber test runner
-├── stepdefs/ # Step definitions
-└── utils/ # Common utilities
-
+├── api/            # API service layer
+├── config/         # Configuration classes
+├── constants/      # Constants and endpoints
+├── helpers/        # Utility classes
+├── hooks/          # Cucumber hooks
+├── pageobjects/    # Page Object Model classes
+├── pojo/           # Request/Response POJOs
+├── runner/         # Cucumber test runner
+├── stepdefs/       # Step definitions
+└── utils/          # Common utilities
+```
 
 ## 🔑 Key Features
 
