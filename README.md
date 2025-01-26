@@ -10,6 +10,24 @@ This framework is actively being developed. Planned improvements include:
 - Performance optimizations
 - More comprehensive documentation
 
+## 🌿 Branches
+
+⚠️ **Important**: Active development happens in the following branches. Please check them for the latest code:
+
+### [cucumber-tests](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/cucumber-tests)
+- Single-threaded execution
+- BDD implementation with Cucumber
+- Cucumber HTML reporting
+- Step definitions and feature files
+
+### [parallel-tests-logs-allure-reports](https://github.com/kveldulf1/java-selenium-rest-assured-test-automation-framework/tree/parallel-tests-logs-allure-reports)
+- Concurrent test execution
+- Resource locking for thread safety during parallel execution
+- Fluent chain pattern implementation
+- Allure reporting integration
+- Buffered logs for concurrent tests displayed sequentially in the console
+- Parallel test execution capabilities
+
 ## 🎯 Tested Application
 
 This framework is designed to test [GAD (GUI API Demo)](https://github.com/jaktestowac/gad-gui-api-demo) - an application specifically created for testing purposes that provides:
@@ -29,24 +47,6 @@ For the best testing experience, we recommend:
    npm run start
    ```
 The application will be available at `http://localhost:3000`
-
-## 🌿 Branches
-
-The framework offers two different implementations:
-
-### cucumber-tests
-- Single-threaded execution
-- BDD implementation with Cucumber
-- Cucumber HTML reporting
-- Step definitions and feature files
-
-### parallel-tests-logs-allure-reports
-- Concurrent test execution
-- Resource locking for thread safety during parallel execution
-- Fluent chain pattern implementation
-- Allure reporting integration
-- Buffered logs for concurrent tests displayed sequentially in the console
-- Parallel test execution capabilities
 
 ## 🛠 Tech Stack & Versions
 - Java 21

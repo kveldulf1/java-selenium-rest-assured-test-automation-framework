@@ -7,11 +7,10 @@ import utils.TestContext;
 
 public class CommonApiSteps extends BaseApiSteps {
 
-    private final CommonApiCalls commonApiCalls;
     private final TestContext testContext;
 
     public CommonApiSteps(TestContext testContext) {
-        this.commonApiCalls = new CommonApiCalls();
+        new CommonApiCalls();
         this.testContext = testContext;
     }
 
